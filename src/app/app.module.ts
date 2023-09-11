@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BestellingComponent } from './bestelling/bestelling.component';
+import { GroentenService } from './groenten.service';
+import { InMemoryDataService } from './in-memory-data.service';
 
 @NgModule({
   declarations: [
@@ -12,9 +16,12 @@ import { BestellingComponent } from './bestelling/bestelling.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule ,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
+    HttpClientInMemoryWebApiModule.forFeature(InMemoryDataService)
   ],
-  providers: [],
+  providers: [GroentenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
