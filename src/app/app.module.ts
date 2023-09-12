@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { BestellingComponent } from './bestelling/bestelling.component';
 import { GroentenService } from './groenten.service';
 import { InMemoryDataService } from './in-memory-data.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,8 @@ import { InMemoryDataService } from './in-memory-data.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule ,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
-    HttpClientInMemoryWebApiModule.forFeature(InMemoryDataService)
+    FormsModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)    
   ],
   providers: [GroentenService],
   bootstrap: [AppComponent]

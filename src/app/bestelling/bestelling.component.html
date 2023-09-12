@@ -1,4 +1,42 @@
-<p>bestelling works!</p>
-<p *ngFor="let g of groenten">
-    test {{g.naam}}
-</p>
+<h1>Bestelling works!</h1>
+
+<div>
+    <label>Groente:</label>
+    <p></p>
+    <select id="groente" [(ngModel)]="selectedGroente">
+        <option *ngFor="let g of groenten" value="{{g.id}}">{{g.naam}} ({{g.prijs}}/{{g.eenheid}})</option>
+    </select>
+</div>
+<div>
+    <label>Aantal:</label>
+    <p></p>
+    <input type="number" id="aaantal" value="0">    
+</div>
+<button id="toevoegen" (click)="toevoegenMandje()">Toevoegen aan mandje</button>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Groente</th>
+                <th>Aantal</th>
+                <th>Prijs</th>
+                <th>Te betalen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Totaal</td>
+                <td colspan="3"></td>
+            </tr>                        
+        </tfoot>
+    </table>
+</div>
