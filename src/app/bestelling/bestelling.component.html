@@ -1,4 +1,4 @@
-<h1>Bestelling works!</h1>
+<h1>Bestelling</h1>
 
 <div>
     <label>Groente:</label>
@@ -25,11 +25,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <tr *ngFor="let bestelling of bestellingen">
+                <td>{{bestelling.groente}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         </tbody>
         <tfoot>

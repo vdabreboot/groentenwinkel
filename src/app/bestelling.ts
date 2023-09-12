@@ -1,5 +1,5 @@
 export interface Bestelling {
-    id: number,
+    //id: number,
     groente: string,
     prijs: number,
     tebetalen: number,
