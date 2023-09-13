@@ -12,7 +12,7 @@ export class GroentenService {
   res:string = null!;
   private groentenURl = 'api/groenten';
   //private groentenURl = '/assets/groenten.json';
-  private bestellingURl = 'api/bestellingen';
+  private bestellingURL = 'api/bestellingen';
   constructor(private http : HttpClient) { }
 
   getGroenten(): Observable<Groente[]> {    
@@ -21,7 +21,6 @@ export class GroentenService {
         catchError(this.handleError('getGroenten',[]))
       )
   }
-
   /*getGroentenFromJason(): Observable<Groente[]> {    
      this.res = fetch('/assets/groenten.json').then((response)=> response.json()
       .then(    
@@ -30,6 +29,20 @@ export class GroentenService {
         catchError(this.handleError('getGroenten',[]))
       )
   }*/
+  getGroente(index: number): Observable<Groente> {
+    const urlAction = `${this.groentenURl}/${index}}`;
+    return this.http.get<Groente>(urlAction)
+      .pipe(
+        catchError(this.handleError<Groente>(`getGroente ${index}`))
+      )
+  }
+  getGroente2<Groente>(index: number){
+    const urlAction = `${this.groentenURl}/${index}}`;
+    return this.http.get<Groente>(urlAction)
+      .pipe(
+        catchError(this.handleError<Groente>(`getGroente ${index}`))
+      )
+  }
 
   addGroente(groente: Groente) : Observable<any> {
     return this.http.post(this.groentenURl,groente,httpOptions)
@@ -37,16 +50,22 @@ export class GroentenService {
   }
 
   getBestellingen() : Observable<Bestelling[]> {
-    return this.http.get<Bestelling[]>(this.bestellingURl)
+    return this.http.get<Bestelling[]>(this.bestellingURL)
       .pipe(
         catchError(this.handleError('getBestellingen',[]))
       )
   }
-  addBestelling(bestelling: Bestelling) : Observable<any> {
-    return this.http.post<Bestelling>(this.bestellingURl,httpOptions)
+  addBestelling(bestelling: Bestelling) : Observable<Bestelling> {
+    console.log("toevoegen bestelling");
+    return this.http.post<Bestelling>(this.bestellingURL,bestelling,httpOptions)
       .pipe(
-        catchError(this.handleError<any>('addBestelling'))
-      )
+        catchError(this.handleError<Bestelling>('addBestelling')),        
+      )      
+  }
+  VerwijderBestelling(bestelling: Bestelling): Observable<Bestelling>{
+    const urlAction = this.bestellingURL + `/${bestelling.id}`;
+    return this.http.delete<Bestelling>(urlAction,httpOptions)
+      .pipe(catchError(this.handleError<Bestelling>('deleteBestelling')))
   }
 
   handleError<T>(operation = 'operation',result?: T){

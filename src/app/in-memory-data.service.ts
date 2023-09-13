@@ -37,8 +37,6 @@ export class InMemoryDataService implements InMemoryDbService{
 
         const bestellingen : Bestelling[] = [];
         return { bestellingen , groenten };
-
-
     }
 
     /*public getJSON(): Observable<any> {

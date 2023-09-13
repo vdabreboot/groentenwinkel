@@ -3,40 +3,43 @@
 <div>
     <label>Groente:</label>
     <p></p>
-    <select id="groente" [(ngModel)]="selectedGroente">
+    <select id="groente" [(ngModel)]="selectedGroente" >
         <option *ngFor="let g of groenten" value="{{g.id}}">{{g.naam}} ({{g.prijs}}/{{g.eenheid}})</option>
     </select>
 </div>
 <div>
     <label>Aantal:</label>
     <p></p>
-    <input type="number" id="aaantal" value="0">    
+    <input type="number" id="aaantal" value="0" min="1" [(ngModel)]="aantal">    
+    <p></p>
 </div>
-<button id="toevoegen" (click)="toevoegenMandje()">Toevoegen aan mandje</button>
+<button id="toevoegen" (click)="toevoegenMandje()" class="btn btn-primary">Toevoegen aan mandje</button>
 
 <div>
-    <table>
+    <p></p>
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Groente</th>
-                <th>Aantal</th>
-                <th>Prijs</th>
-                <th>Te betalen</th>
+                <th scope="col">Groente</th>
+                <th scope="col">Aantal</th>
+                <th scope="col">Prijs</th>
+                <th scope="col">Te betalen</th>                
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let bestelling of bestellingen">
-                <td>{{bestelling.groente}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let bestelling of bestellingen" [class.selected]="bestelling === selectedBestelling" (click)="onSelect(bestelling)">
+                <td  [class.selected]="bestelling === selectedBestelling"  class="bestelling_{{bestelling.id}}">{{bestelling.groente}}</td>
+                <td class="text-end" [class.selected]="bestelling === selectedBestelling" >{{bestelling.aantal}}</td>
+                <td class="text-end" [class.selected]="bestelling === selectedBestelling" >{{bestelling.prijs}}</td>
+                <td class="text-end" [class.selected]="bestelling === selectedBestelling" >{{bestelling.tebetalen}}</td>                
             </tr>
         </tbody>
         <tfoot>
             <tr>
                 <td>Totaal</td>
-                <td colspan="3"></td>
+                <td colspan="3" class="text-end">{{totaal}}</td>
             </tr>                        
         </tfoot>
     </table>
+    <button *ngIf="selectedBestelling"  class="btn btn-primary" (click)="onDelete(selectedBestelling)">verwijder geselecteerde lijn</button>
 </div>
